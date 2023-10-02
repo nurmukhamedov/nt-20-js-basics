@@ -99,50 +99,49 @@
 
 
 
-// const items = document.querySelectorAll('.list li');
+const items = document.querySelectorAll('.list li');
 
-// items.forEach((item, index) => {
-//     item.addEventListener('click', () => {
-//         console.log(`clicked ${index}`);
-//     })
-// })
-
-
-// const form = document.querySelector('form');
-// const list = document.querySelector('.list');
-// const userName = document.querySelector('.userName');
-// const names = [];
-
-// form.addEventListener('submit', (e) => {
-//     e.preventDefault();
-
-//     const newName = userName.value.trim();
-
-//     if (newName !== "") {
-//         names.push(newName);
-//         localStorage.setItem("tasks", JSON.stringify(names));
-//         form.reset();
-//     }
-
-//     renderNames();
-
-// })
+items.forEach((item, index) => {
+    item.addEventListener('click', () => {
+        console.log(`clicked ${index}`);
+    })
+})
 
 
-// function renderNames() {
+const form = document.querySelector('form');
+const list = document.querySelector('.list');
+const userName = document.querySelector('.userName');
+const storedNames = JSON.parse(localStorage.getItem("tasks")) || [];
+const names = storedNames;
 
-//     list.innerHTML = '';
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
 
-//     names.forEach((name) => {
-//         const nameElement = document.createElement('h3');
-//         const deleteButton = document.createElement('button');
-//         deleteButton.textContent = 'Delete';
-//         nameElement.textContent = name;
-//         list.appendChild(nameElement);
-//         list.appendChild(deleteButton);
-//     });
-// }
+    const newName = userName.value.trim();
 
+    if (newName !== "") {
+        names.push(newName);
+        localStorage.setItem("tasks", JSON.stringify(names));
+        form.reset();
+    }
+
+    renderNames();
+
+})
+
+
+function renderNames() {
+    list.innerHTML = ''
+    names.forEach((name) => {
+        const nameElement = document.createElement('h3');
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete';
+        nameElement.textContent = name;
+        list.appendChild(nameElement);
+        list.appendChild(deleteButton);
+    });
+}
+renderNames();
 
 
 
