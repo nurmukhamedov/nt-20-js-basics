@@ -1,5 +1,16 @@
-function exampleFunction() {
-    return 'Hello world'
-}
+// function exampleFunction() {
+//     return 'Hello world'
+// }
 
-export default exampleFunction 
+// function secondFn() {
+//     return 'second fun'
+// }
+
+// const myName = 'Muhammadrasul';
+
+// const myObj = {
+//     firstName: 'John',
+//     lastName: 'Doe'
+// }
+
+// export { exampleFunction, secondFn, myName, myObj };

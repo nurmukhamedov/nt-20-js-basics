@@ -13,8 +13,6 @@
 //   const newLastName = lastName.value.trim();
 
 
-
-
 //   if (newName !== "" && lastName !== "") {
 //     const newTask = { name: newName, lastName: newLastName };
 
@@ -34,7 +32,9 @@
 //     const nameElement = document.createElement('h3');
 //     const lastNameElement = document.createElement('h3');
 //     const deleteButton = document.createElement('button');
+//     const editButton = document.createElement('button');
 //     deleteButton.textContent = 'Delete';
+//     editButton.textContent = 'Edit';
 //     nameElement.textContent = name.name;
 //     lastNameElement.textContent = name.lastName;
 
@@ -44,95 +44,126 @@
 //       renderNames();
 //     });
 
+//     editButton.addEventListener('click', () => {
+//       userName.value = name.name;
+//       lastName.value = name.lastName;
+//       names.splice(index, 1);
+//     });
 //     list.appendChild(nameElement);
 //     list.appendChild(lastNameElement);
+//     list.appendChild(editButton);
 //     list.appendChild(deleteButton);
 //   });
 // }
 // renderNames();
 
+// import { exampleFunction as myFun, secondFn, myName, myObj } from "./helper.js";
+
+// console.log(myFun());
+// console.log(secondFn());
+// console.log(myObj);
+
+const arr = [1, 2, 3, 4, 5, 6];
+
+// const [myNumber, hisNumber, herNumber] = arr;
+
+// console.log(hisNumber);
+// console.log(herNumber);
 
 
-// (function () {
-//   var firstName = 'Muhammadrasul';
-//   console.log(firstName);
+// const myObj = {
+//   firstName: 'John',
+//   lastName: 'Doe',
+// }
 
-// })();
+// console.log(myObj);
+// const { firstName: objName, lastName: objLastName } = myObj;
+// console.log(objName);
+// console.log(objLastName);
 
-const form = document.querySelector('form');
-const userName = document.querySelector('.userName');
-const lastName = document.querySelector('.lastName');
-
-
-
-const userNameError = document.querySelector('.error-name');
-
-form.addEventListener('submit', () => {
-  const userNameValue = userName.value.trim();
-  const lastNameValue = lastName.value.trim();
+// const arr2 = [7, 8, 9, 10];
+// const arr3 = [...arr, ...arr2];
 
 
+// function myFun(...a) {
+//   console.log(a);
+// }
 
-  if (userNameValue === "" || userNameValue.length < 6) {
-    userNameError.textContent = '6 ta harfdan kam yoki bo`sh bo `lishi mumkin emas';
-    userNameError.classList.add('error');
-  } else {
-    userNameError.textContent = '';
-    userNameError.classList.remove('error');
-  }
+// myFun(1, 2, 3, 4, 6);
 
 
-})
-
-userName.addEventListener('input', (event) => {
-  const inputValue = event.target.value;
-
-  if (inputValue.length <= 6) {
-    userNameError.textContent = '6 ta harfdan kam ';
-  } else {
-    userNameError.textContent = '';
-  }
-
-})
+// const { firstName } = myObj
+// console.log(firstName);
+// console.log(myObj);
 
 
-const menu = document.querySelector('.menu');
+// const cars = [
+//   {
+//     name: 'BMw'
+//   },
+//   {
+//     model: 'Lexus'
+//   },
+//   {
+//     model: 'Lexus'
+//   }
+// ]
+
+// cars.forEach(element => {
+//   const carElements = Object.values(element);
+//   console.log(carElements);
+// });
 
 
-const mySet = menu.dataset;
-console.log(mySet);
+// class Student {
+//   constructor(name, age) {
+//     this.studentAge = age;
+//     this.firstName = name;
+//   }
+
+//   sayHello() {
+//     return `Hello, I'am ${this.firstName}, my age is ${this.studentAge}`
+//   }
 
 
-console.log(mySet.hello_world);
+// }
 
-menu.setAttribute("hello", "menu-name")
-
-const menuAttribute = menu.getAttribute("class");
-console.log(menuAttribute);
-const myArray = [8, 2, 3, 4, 5, 6, 7];
-
-const myFragment = new DocumentFragment();
-
-myArray.forEach((element) => {
-  const li = document.createElement('li');
-  li.textContent = element;
-
-  myFragment.appendChild(li);
-})
-
-menu.appendChild(myFragment)
-
-// import { exampleFunction } from "./helper";
-// console.log(exampleFunction);
-
-console.log(menu.outerHTML);
+// const Shohjahon = new Student('Shohjahon', 20);
 
 
+// console.log(Shohjahon);
 
-const list = document.querySelector('.list');
+// const button = document.querySelector('button');
 
-list.insertAdjacentHTML('beforeend', '<p>Why</p>');
+// button.addEventListener('click', () => {
+//   console.log('button clicked');
+// })
 
-import myFun from './helper.js';
+// console.log('hello world');
 
-console.log(myFun());
+
+// micro task - ajax calls, promises, async await
+// macro task - addEventListener, setTimeout
+
+// setTimeout(() => {
+//   console.log('time out');
+// }, 3000);
+
+// console.log('hello world');
+
+// const myInterval = setInterval(() => {
+//   console.log('hello set interval');
+// }, 2000);
+
+
+// const currentTime = new Date();
+// const hours = currentTime.getSeconds();
+// console.log(hours);
+
+// console.log(currentTime);
+
+const x = '5';
+
+const newX = x.padStart(3, "a");
+
+console.log(newX);
