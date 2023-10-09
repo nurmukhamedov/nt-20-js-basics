@@ -1,148 +1,138 @@
-// let sumOfNumbers = 0;
+// const form = document.querySelector('form');
+// const list = document.querySelector('.list');
+// const userName = document.querySelector('.userName');
+// const lastName = document.querySelector('.lastName');
 
-// for (let i = 1; i <= 5; i++) {
-//     let userInput = prompt(`Enter number ${i}`);
+// const storedNames = JSON.parse(localStorage.getItem("tasks")) || [];
+// const names = storedNames;
 
-//     if (userInput == "" || userInput === "0") {
-//         console.log('Invalid string');
-//     } else {
-//         let number = parseInt(userInput);
-//         if (!isNaN(number)) {
-//             sumOfNumbers += number
-//         } else {
-//             console.log("Invalid string");
-//         }
-//     }
+// form.addEventListener('submit', (e) => {
+//   e.preventDefault();
+
+//   const newName = userName.value.trim();
+//   const newLastName = lastName.value.trim();
+
+
+
+
+//   if (newName !== "" && lastName !== "") {
+//     const newTask = { name: newName, lastName: newLastName };
+
+//     names.push(newTask);
+
+//     localStorage.setItem("tasks", JSON.stringify(names));
+//     form.reset();
+//   }
+//   renderNames();
+
+// })
+
+
+// function renderNames() {
+//   list.innerHTML = ''
+//   names.forEach((name, index) => {
+//     const nameElement = document.createElement('h3');
+//     const lastNameElement = document.createElement('h3');
+//     const deleteButton = document.createElement('button');
+//     deleteButton.textContent = 'Delete';
+//     nameElement.textContent = name.name;
+//     lastNameElement.textContent = name.lastName;
+
+//     deleteButton.addEventListener('click', () => {
+//       names.splice(index, 1);
+//       localStorage.setItem('tasks', JSON.stringify(names));
+//       renderNames();
+//     });
+
+//     list.appendChild(nameElement);
+//     list.appendChild(lastNameElement);
+//     list.appendChild(deleteButton);
+//   });
 // }
-
-// console.log(sumOfNumbers);
-
-
-
-// Task3
-
-
-// const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-// const array2 = [1, 2, 3, 4, 5];
-
-// function divideSumEvenOdd(arr) {
-
-//     let evenSum = 0;
-//     let oddSum = 0;
-
-//     for (const element of arr) {
-//         if (element % 2 === 0) {
-//             evenSum += element
-//         } else {
-//             oddSum += element
-//         }
-//     }
-
-//     const newArray = [oddSum, evenSum]
-//     return newArray;
-// }
-
-// console.log(divideSumEvenOdd(array));
-// console.log(divideSumEvenOdd(array2));
+// renderNames();
 
 
 
-// const obj = {
-//     Tom: 1200,
-//     Adel: 2000,
-//     John: 1400,
-//     Jack: "2300",
-//     Mil: undefined
-// }
+// (function () {
+//   var firstName = 'Muhammadrasul';
+//   console.log(firstName);
 
-
-// function calcSalaries(salaries) {
-//     let total = 0;
-//     for (const key in salaries) {
-//         let salary = salaries[key];
-//         if (typeof salary === 'string') {
-//             salary = Number(salary);
-//         } else if (typeof salary === 'undefined') {
-//             salary = 0;
-//         }
-//         if (salaries.hasOwnProperty(key)) {
-//             total += salary
-//         }
-
-//     }
-
-//     return total
-// }
-
-// console.log(calcSalaries(obj));
-
-
-// function findMissingNum(arr) {
-//     const minValue = Math.min(...arr);
-//     const maxValue = Math.max(...arr);
-//     const newArray = [];
-
-
-//     for (let i = minValue; i <= maxValue; i++) {
-//         newArray.push(i);
-//     }
-
-//     const missingArray = newArray.filter((element) => !arr.includes(element))
-
-
-//     console.log(missingArray);
-// }
-
-// const arr = [0, -4, 5, 8]
-// findMissingNum(arr);
-
-
-
-
-const items = document.querySelectorAll('.list li');
-
-items.forEach((item, index) => {
-    item.addEventListener('click', () => {
-        console.log(`clicked ${index}`);
-    })
-})
-
+// })();
 
 const form = document.querySelector('form');
-const list = document.querySelector('.list');
 const userName = document.querySelector('.userName');
-const storedNames = JSON.parse(localStorage.getItem("tasks")) || [];
-const names = storedNames;
+const lastName = document.querySelector('.lastName');
 
-form.addEventListener('submit', (e) => {
-    e.preventDefault();
 
-    const newName = userName.value.trim();
 
-    if (newName !== "") {
-        names.push(newName);
-        localStorage.setItem("tasks", JSON.stringify(names));
-        form.reset();
-    }
+const userNameError = document.querySelector('.error-name');
 
-    renderNames();
+form.addEventListener('submit', () => {
+  const userNameValue = userName.value.trim();
+  const lastNameValue = lastName.value.trim();
+
+
+
+  if (userNameValue === "" || userNameValue.length < 6) {
+    userNameError.textContent = '6 ta harfdan kam yoki bo`sh bo `lishi mumkin emas';
+    userNameError.classList.add('error');
+  } else {
+    userNameError.textContent = '';
+    userNameError.classList.remove('error');
+  }
+
+
+})
+
+userName.addEventListener('input', (event) => {
+  const inputValue = event.target.value;
+
+  if (inputValue.length <= 6) {
+    userNameError.textContent = '6 ta harfdan kam ';
+  } else {
+    userNameError.textContent = '';
+  }
 
 })
 
 
-function renderNames() {
-    list.innerHTML = ''
-    names.forEach((name) => {
-        const nameElement = document.createElement('h3');
-        const deleteButton = document.createElement('button');
-        deleteButton.textContent = 'Delete';
-        nameElement.textContent = name;
-        list.appendChild(nameElement);
-        list.appendChild(deleteButton);
-    });
-}
-renderNames();
+const menu = document.querySelector('.menu');
+
+
+const mySet = menu.dataset;
+console.log(mySet);
+
+
+console.log(mySet.hello_world);
+
+menu.setAttribute("hello", "menu-name")
+
+const menuAttribute = menu.getAttribute("class");
+console.log(menuAttribute);
+const myArray = [8, 2, 3, 4, 5, 6, 7];
+
+const myFragment = new DocumentFragment();
+
+myArray.forEach((element) => {
+  const li = document.createElement('li');
+  li.textContent = element;
+
+  myFragment.appendChild(li);
+})
+
+menu.appendChild(myFragment)
+
+// import { exampleFunction } from "./helper";
+// console.log(exampleFunction);
+
+console.log(menu.outerHTML);
 
 
 
+const list = document.querySelector('.list');
 
+list.insertAdjacentHTML('beforeend', '<p>Why</p>');
+
+import myFun from './helper.js';
+
+console.log(myFun());

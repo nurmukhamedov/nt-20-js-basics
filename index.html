@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Javascript</title>
+    <link rel="stylesheet" href="./css/main.css">
 </head>
 
 <body>
@@ -24,14 +25,20 @@
 
     <form action="#">
         <input class="userName" type="text" placeholder="ism kiriting">
-
+        <span class="error-name"></span>
+        <input class="lastName hello" type="email" placeholder="familiya kiriting">
+        <span class="error-lastName"></span>
         <button type="submit" class="btn">Submit</button>
     </form>
 
-    <div class="list"></div>
+    <div class="list">
+        <h3>Test</h3>
+    </div>
 
+    <ul class="menu" id="myID" data-hello_world="good job">
 
-    <script src="./script/index.js"></script>
+    </ul>
+    <script type="module" src="./script/index.js"></script>
 </body>
 
 </html>
