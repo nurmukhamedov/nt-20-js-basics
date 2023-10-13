@@ -1,69 +1,121 @@
-// const myFirstDiv = document.querySelector('.first');
-// // const secondDiv = myFirstDiv.previousElementSibling;
-// // console.log(secondDiv);
+// const itemsPerPage = 100;
+// let currentPage = 1;
+// let totalItems = 0;
+// let myData = [];
+// const loadingMessage = document.querySelector('.loading');
+// const main = document.querySelector('.main');
+// const myFragment = new DocumentFragment();
+// const notFoundMessage = document.querySelector('.not-found');
+// const searchInput = document.querySelector('.search');
+// const pagination = document.querySelector('.pagination');
 
-// const firstParent = myFirstDiv.parentNode;
+// fetch('https://jsonplaceholder.typicode.com/photos').then(function (response) {
+//     return response.json();
+// }).then(function (data) {
+//     myData = data.slice(0, 500);
+//     totalItems = myData.length;
+//     generatePaginationLinks();
+//     updateCard('');
+// }).catch(function (error) {
+//     console.log(error);
+// });
 
-// console.log(firstParent);
+// searchInput.addEventListener('input', function () {
+//     updateCard(this.value);
+//     updatePaginationLink();
+// })
 
+// function updateCard(searchValue) {
+//     loadingMessage.style.display = 'block';
+//     main.innerHTML = '';
+//     let found = false;
+//     const startIndex = (currentPage - 1) * itemsPerPage;
+//     const endIndex = Math.ceil(startIndex + itemsPerPage, totalItems);
 
-// const button = document.querySelector('.btn');
+//     myData.slice(startIndex, endIndex).forEach((data) => {
+//         const dataTitle = data.title.toLowerCase();
+//         const searchTitle = searchValue.toLowerCase();
+//         if (dataTitle.includes(searchTitle)) {
+//             const card = document.createElement('div');
+//             const img = document.createElement('img');
+//             img.src = data.url;
+//             img.alt = data.title;
+//             myFragment.appendChild(img);
+//             const h2 = document.createElement('h2');
+//             h2.textContent = data.title;
+//             myFragment.appendChild(h2);
+//             card.appendChild(myFragment);
+//             main.appendChild(card);
+//             found = true;
+//         }
+//     })
 
-// const closestElement = button.closest('.inner');
+//     loadingMessage.style.display = 'none';
 
-// console.log(closestElement);
-
-// function multiply(number) {
-//     const myNum = 8;
-
-//     return function (factor) {
-//         return number * factor + myNum;
+//     if (!found) {
+//         notFoundMessage.style.display = 'block';
+//     } else {
+//         notFoundMessage.style.display = 'none';
 //     }
+
+//     window.scrollTo(0, 0)
 // }
 
+// function generatePaginationLinks() {
+//     pagination.innerHTML = '';
+//     const totalPages = Math.ceil(totalItems / itemsPerPage);
 
-// const sayHello = function (name, callback) {
-//     console.log(`Hello ${name}`);
-//     callback()
+//     myData.slice(0, totalPages).forEach((_, index) => {
+//         const pageLink = document.createElement('li');
+//         pageLink.textContent = index + 1;
+
+//         pageLink.addEventListener('click', () => {
+//             currentPage = index + 1;
+//             updateCard(searchInput.value);
+//             updatePaginationLink();
+//         });
+//         if (index + 1 === currentPage) {
+//             pageLink.classList.add('active');
+//         }
+
+//         pagination.appendChild(pageLink);
+//     })
+
 // }
 
-// const sayGoodBye = () => {
-//     console.log('Bye');
+// function updatePaginationLink() {
+//     const pageLinks = document.querySelectorAll('li');
+//     pageLinks.forEach((link, index) => {
+//         if (index + 1 === currentPage) {
+//             link.classList.add('active')
+//         } else {
+//             link.classList.remove('active')
+//         }
+//     })
 // }
 
-// sayHello('Muhammadrasul', sayGoodBye)
+const main = document.querySelector('.main');
 
-
-// const newNumber = multiply(5);
-
-// console.log(newNumber(4)); 
-
-// const myData = fetch('https://jsonplaceholder.typicode.com/photos');
-
-// console.log(myData);
-
-
-
-
-fetch('https://jsonplaceholder.typicode.com/photos').then(function (response) {
+fetch('https://restcountries.com/v3.1/all').then((response) => {
     return response.json();
-}).then(function (data) {
+}).then((data) => {
 
-    const myData = data.slice(0, 100);
-    const main = document.querySelector('.main');
-    const myFragment = new DocumentFragment();
-    myData.forEach((data) => {
-        const card = document.createElement('div');
-        const img = document.createElement('img');
-        img.src = data.url;
-        img.alt = data.title;
-        myFragment.appendChild(img);
-        const h2 = document.createElement('h2');
-        h2.textContent = data.title;
-        myFragment.appendChild(h2);
-        card.appendChild(myFragment);
-        main.appendChild(card);
+    data.forEach((country) => {
+        const languages = country.languages;
+        const langDiv = document.createElement('li');
+        let firstLang;
+        let secondLeng = '';
+
+        if (languages) {
+            const languagesValues = Object.values(languages);
+            firstLang = languagesValues[0];
+            if (languagesValues.length >= 2) {
+                secondLeng = languagesValues[1]
+            }
+        }
+        langDiv.textContent = `Birinchi til: ${firstLang}`
+        main.appendChild(langDiv);
+
     })
-}).catch(function (error) {
-    console.log(error);
-})
+}).catch((error) => console.log(error))
+
