@@ -1,42 +1,72 @@
-async function fetchData(url) {
-    const error = document.querySelector('.error');
-    try {
-        const response = await fetch(url);
-        const data = await response.json();
+// const myPromise = new Promise((resolve, reject) => {
+//     const number = 4;
 
-        if (!response.ok) {
-            error.textContent = data.message
-        }
-        console.log(data);
+//     if (number > 5) {
+//         resolve('Raqam 5 dan katta')
+//     } else {
+//         reject('Raqam 5 dan kichkina')
+//     }
+// });
+
+// myPromise.then((data) => console.log(data)).catch((error) => console.log(error)); 
+
+
+
+
+
+const GITHUB_API_URL = 'https://api.github.com/users';
+const PERSONAL_ACCESS_TOKEN = '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';
+
+async function getUsers(url) {
+    try {
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Authorization': `token ${PERSONAL_ACCESS_TOKEN}`,
+            }
+        })
+        const data = await response.json();
+        return data;
 
     } catch (error) {
-        console.log(error.message);
+        console.log(error);
     }
 }
 
-fetchData('https://restcountries.com/v3.1/all');
+const userListWrapper = document.getElementById('userData');
 
-async function searchByCountryName(countryName) {
-    try {
+async function renderUsers() {
+    const users = await getUsers(GITHUB_API_URL);
+    renderList(users);
+}
+renderUsers();
 
-        const response = await fetch(`https://restcountries.com/v3.1/name/${countryName}`);
-        const data = await response.json();
-
-        if (!response.ok) {
-            console.log(data.message);
-        }
-
-        console.log(data);
-    } catch (error) {
-        console.log(error.message);
-    }
+function renderList(users) {
+    users.forEach((user) => {
+        const fragment = new DocumentFragment();
+        const card = document.createElement('div');
+        const avatar = document.createElement('img');
+        avatar.src = user.avatar_url ? user.avatar_url : user.owner.avatar_url;
+        const userName = document.createElement('h4');
+        userName.textContent = user.login ? user.login : user.owner.login;
+        fragment.appendChild(avatar);
+        fragment.appendChild(userName);
+        card.appendChild(fragment);
+        userListWrapper.appendChild(card);
+    })
 }
 
-const searchButton = document.querySelector('#searchButton');
-const inputValue = document.querySelector('#countrySearch');
+const searchInput = document.getElementById('userSearch');
 
-searchButton.addEventListener('click', () => {
-    const name = inputValue.value.trim();
-    searchByCountryName(name);
-});
+const button = document.getElementById('searchButton');
 
+async function searchUsers(searchValue) {
+    const user = await getUsers(`https://api.github.com/search/repositories?q=${searchValue}`)
+    userListWrapper.innerHTML = '';
+    console.log(user.items);
+    renderList(user.items)
+}
+
+button.addEventListener('click', () => {
+    searchUsers(searchInput.value.trim());
+})
