@@ -9,16 +9,19 @@
 </head>
 
 <body>
-    <h1>UserData Data</h1>
-    <div class="error"></div>
-    <div>
-        <input type="text" id="userSearch" placeholder="Search Users">
-        <button id="searchButton">Search</button>
-    </div>
     <div class="container">
-        <div class="wrapper" id="userData"></div>
+        <h1>Create a Post</h1>
+        <form id="post-form">
+            <input type="text" id="title" placeholder="Title" required>
+            <textarea id="body" placeholder="Body" required></textarea>
+            <button type="submit">Create Post</button>
+        </form>
+        <div id="post-container"></div>
 
     </div>
+
+    </div>
+
     <script src="./script/index.js"></script>
 </body>
 
